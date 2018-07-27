@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,13 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public string controlLocked = "n";
     public Transform boomObj;
 
-	// Use this for initialization
-	void Start () 
-    {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () 
     {
         GetComponent<Rigidbody>().velocity = new Vector3(horizVel, GameManager.vertVel, 4);
@@ -47,9 +39,6 @@ public class PlayerMovement : MonoBehaviour
             GameManager.zVelAdj = 0;
             Instantiate(boomObj, transform.position, boomObj.rotation);
             GameManager.lvlCompStatus = "Fail";
-        }if (collision.gameObject.name == "Capsule")
-        {
-            Destroy(collision.gameObject);
         }
     }
 
@@ -64,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         }if (other.gameObject.name == "Exit")
         {
             SceneManager.LoadScene(1);
-            GameManager.lvlCompStatus = "Sucess";
+            GameManager.lvlCompStatus = "Success";
         }if (other.gameObject.name == "Coin(Clone)")
         {
             Destroy(other.gameObject);
@@ -72,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.name == "Capsule")
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 
